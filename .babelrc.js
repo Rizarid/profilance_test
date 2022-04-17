@@ -3,6 +3,9 @@ module.export = {
     "src/**/*.js",
     "src/**/*.jsx"
   ],
+  "exclude": [
+    "src/**/*.json"
+  ],
   "presets": [
     "@babel/preset-react"
   ]

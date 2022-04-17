@@ -1,13 +1,13 @@
 [
   {
     "userID": "1",
-    "login": "user",
+    "userName": "user",
     "password": "user",
     "role": "user"
   },
   {
     "userID": "2",
-    "login": "admin",
+    "userName": "admin",
     "password": "admin",
     "role": "admin"
   }
