@@ -97,19 +97,9 @@ module.exports = {
         use: babelLoader([])
       },
       {
-        test: /\.ts/,
-        exclude: /node_modules/,
-        use: babelLoader(['@babel/preset-typescript'])
-      },
-      {
         test: /\.jsx/,
         exclude: /node_modules/,
         use: babelLoader(['@babel/preset-react'])
-      },
-      {
-        test: /\.tsx/,
-        exclude: /node_modules/,
-        use: babelLoader(['@babel/preset-typescript','@babel/preset-react'])
       },
       {
         test: /\.css$/,

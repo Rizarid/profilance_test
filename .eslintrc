@@ -1,18 +1,26 @@
 {
-  "parser": "@typescript-eslint/parser",
+  "parser": "@babel/eslint-parser",
+  "plugins": [
+    "@babel"
+  ],
+
   "parserOptions": {
     "sourceType": "module",
-    "allowImportExportEverywhere": false,
-    "project":  ["./tsconfig.json"]
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    }
+  },
+
+  "env": {
+    "browser": true,
+    "es2021": true
   },
 
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "airbnb",
-    "airbnb-typescript"
+    "airbnb"
   ],
 
   "rules": {
