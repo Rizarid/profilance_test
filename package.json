@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Konstantin Lozhkin",
   "license": "MIT",
+  "homepage": "https://rizarid.github.io/profilance_test",
   "browserslist": ">0.25%, not dead",
   "type": "commonjs",
   "scripts": {
@@ -13,7 +14,7 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
     "lint": "eslint src/**/*.jsx",
     "lint-fix": "eslint --fix src/**/*.jsx",
-    "deploy": "npm run build && gh-pages -d build"
+    "deploy": "yarn build && gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

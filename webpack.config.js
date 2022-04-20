@@ -73,7 +73,7 @@ module.exports = {
     }
   },
 
-  devtool: isDev ? 'source-map' : '',
+  devtool: isDev ? 'source-map' : false,
 
   optimization: optimization(),
 
@@ -81,6 +81,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: './static/index.html',
+      inject: 'body',
       minify: {
         collapseWhitespace: !isDev
       }
