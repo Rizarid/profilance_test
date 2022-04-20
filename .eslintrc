@@ -6,6 +6,10 @@
 
   "parserOptions": {
     "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "babelOptions": {
       "presets": ["@babel/preset-react"]
     }
@@ -29,6 +33,10 @@
     "react/require-default-props": "off",
     "@typescript-eslint/no-unused-expressions": "off",
     "class-methods-use-this": "off",
-    "no-var": "error"
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/prop-types": "off",
+    "no-unused-expressions": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/button-has-type": "off",
   }
 }

@@ -47,7 +47,9 @@ const cssLoaders = (extra) => {
 const babelLoader = (preset) => {
   const loaders = {
     loader: 'babel-loader',
-    options: { presets: ['@babel/preset-env', ...preset] }  
+    options: { 
+      presets: ['@babel/preset-env', ...preset],
+    }  
   };
 
   return [loaders]
@@ -56,7 +58,7 @@ const babelLoader = (preset) => {
 module.exports = {
   mode: 'development',
   context: path.resolve(__dirname, 'src'),
-  entry: ['@babel/polyfill', './index.tsx'],
+  entry: ['@babel/polyfill', './index.jsx'],
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
@@ -117,11 +119,17 @@ module.exports = {
         test: /\.(ttf|woff|woff2|ept)$/,
         use: ['file-loader']
       },
+      {
+        test: /\.json$/,
+        use: ['json-loader'],
+        type: 'javascript/auto'
+      }
     ]
   },
 
   devServer: {
     port: 3000,
-    hot: isDev
+    hot: isDev,
+    historyApiFallback: true,
   }
 }
