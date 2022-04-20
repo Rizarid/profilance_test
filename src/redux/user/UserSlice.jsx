@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 
@@ -5,11 +6,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import users from './users.json';
 
-const initializationState = {
+const initialState = {
   data: {
     userID: null,
     userName: null,
-    role: null,
+    role: 'guest',
     authorized: false,
   },
   status: null,
@@ -18,11 +19,14 @@ const initializationState = {
 
 export const logInThunk = createAsyncThunk(
   'user/logInThunk',
-  async ({ login, password }, { rejectWithValue }) => {
+  async ({ login, password, closePopup }, { rejectWithValue }) => {
     try {
-      const user = users.find((item) => (item.login === login && item.password === password));
+      const user = users.find((item) => (item.userName === login && item.password === password));
 
       if (!user) throw new Error('incorrect login or password');
+
+      closePopup();
+
       return {
         userID: user.userID,
         userName: user.userName,
@@ -37,10 +41,15 @@ export const logInThunk = createAsyncThunk(
 
 export const userSlice = createSlice({
   name: 'user',
-  initializationState,
+  initialState,
   reducers: {
-    logOut: (state) => {
-      state = initializationState;
+    logOut: (state, action) => {
+      state.data = {
+        userID: null,
+        userName: null,
+        role: 'guest',
+        authorized: false,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -51,7 +60,7 @@ export const userSlice = createSlice({
       })
       .addCase(logInThunk.fulfilled, (state, action) => {
         state.status = 'resolved';
-        state.data = action;
+        state.data = action.payload;
       })
       .addCase(logInThunk.rejected, (state, action) => {
         state.status = 'error';
@@ -60,6 +69,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { logIn, logOut } = userSlice.actions;
+export const { logOut } = userSlice.actions;
 
 export default userSlice.reducer;
