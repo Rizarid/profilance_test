@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -7,6 +7,8 @@ import { logInThunk } from '../../redux/user/UserSlice';
 
 import './SignIn.sass';
 import { Button } from '../button/Button';
+
+const MemoButton = memo(Button);
 
 export const SignIn = () => {
   const { handleSubmit, register } = useForm();
@@ -39,7 +41,7 @@ export const SignIn = () => {
 
       {error && <div className="sign-in__error">Неверный логин или пароль</div>}
 
-      <Button type="submit" contentType="text" text="Войти" />
+      <MemoButton type="submit" contentType="text" text="Войти" />
     </form>
   );
 };

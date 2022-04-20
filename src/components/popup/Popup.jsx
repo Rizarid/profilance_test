@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from '../button/Button';
@@ -11,9 +11,9 @@ export const Popup = (props) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const closeButtonClickHandle = () => {
+  const closeButtonClickHandle = useCallback(() => {
     navigate(pathname);
-  };
+  }, [navigate, pathname]);
 
   return (
     <div className={`popup ${!isOpened ? 'popup_closed' : ''}`}>

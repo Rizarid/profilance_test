@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { confirmNewsThunk, deleteNewsThunk } from '../../redux/news/NewsSlice';
 
@@ -15,13 +15,13 @@ export const NewsCard = (props) => {
 
   const dispatch = useDispatch();
 
-  const applyClickHandle = () => {
+  const applyClickHandle = useCallback(() => {
     dispatch(confirmNewsThunk({ newsId }));
-  };
+  }, [dispatch, newsId]);
 
-  const cancelClickHandle = () => {
+  const cancelClickHandle = useCallback(() => {
     dispatch(deleteNewsThunk({ newsId }));
-  };
+  }, [dispatch, newsId]);
 
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const formattedDate = new Date(date).toLocaleDateString('ru', options);

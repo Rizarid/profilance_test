@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getNewsThunk } from '../../redux/news/NewsSlice';
@@ -6,6 +6,8 @@ import { NewsCard } from '../news-card/NewsCard';
 import { useFilter } from '../../hooks/useFilter';
 
 import './News.sass';
+
+const MemoNewsCard = memo(NewsCard);
 
 export const News = () => {
   const dispatch = useDispatch();
@@ -27,7 +29,7 @@ export const News = () => {
       <div className="news__list">
         {filteredNews && filteredNews.map((item) => (
           <li key={item.newsId} className="news__item">
-            <NewsCard
+            <MemoNewsCard
               newsId={item.newsId}
               title={item.title}
               text={item.text}

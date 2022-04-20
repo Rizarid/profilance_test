@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +9,9 @@ import close from '../../static/images/cancel.png';
 
 import './Navigation.sass';
 
+const MemoButton = memo(Button);
+const MemoLink = memo(Link);
+
 export const Navigation = () => {
   const dispatch = useDispatch();
   const authorized = useSelector((state) => state.user.data.authorized);
@@ -16,17 +19,19 @@ export const Navigation = () => {
 
   const [showedBurgerMenu, setShowedBurgerMenu] = useState(false);
 
-  const logOutClick = (event) => {
+  const logOutClick = useCallback((event) => {
     event.preventDefault();
     dispatch(logOut());
-  };
+  }, [dispatch]);
 
-  const switchBurgerMenu = () => { setShowedBurgerMenu(() => !showedBurgerMenu); };
+  const switchBurgerMenu = useCallback(() => {
+    setShowedBurgerMenu(!showedBurgerMenu);
+  }, [setShowedBurgerMenu, showedBurgerMenu]);
 
   return (
     <div className="navigation">
       <div className="navigation__burger">
-        <Button
+        <MemoButton
           type="button"
           contentType="image"
           image={!showedBurgerMenu ? burger : close}
@@ -35,7 +40,7 @@ export const Navigation = () => {
         />
       </div>
       <nav className={`navigation__list ${showedBurgerMenu ? 'navigation__list_showed' : ''}`}>
-        <Link to="/news" className="navigation__link">новости</Link>
+        <MemoLink to="/news" className="navigation__link">новости</MemoLink>
 
         {authorized ? (
           <Link to={pathname} onClick={logOutClick} className="navigation__link">выход</Link>

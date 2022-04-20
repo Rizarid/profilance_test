@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
@@ -6,6 +6,8 @@ import { addNewsThunk } from '../../redux/news/NewsSlice';
 import { Button } from '../button/Button';
 
 import './AddingNewsForm.sass';
+
+const MemoButton = memo(Button);
 
 export const AddingNewsForm = () => {
   const { handleSubmit, register, reset } = useForm();
@@ -27,7 +29,7 @@ export const AddingNewsForm = () => {
         Текст
         <textarea {...register('text', { required: true })} />
       </label>
-      <Button text="Добавить новость" type="submit" />
+      <MemoButton text="Добавить новость" type="submit" />
     </form>
   );
 };
