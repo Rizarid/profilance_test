@@ -12,7 +12,8 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
     "lint": "eslint src/**/*.jsx",
-    "lint-fix": "eslint --fix src/**/*.jsx"
+    "lint-fix": "eslint --fix src/**/*.jsx",
+    "deploy": "npm run build && gh-pages -d build"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -39,6 +40,7 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
     "file-loader": "^6.2.0",
+    "gh-pages": "^3.2.3",
     "html-webpack-plugin": "^5.5.0",
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^2.6.0",
