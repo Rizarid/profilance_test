@@ -58,9 +58,9 @@ export const confirmNewsThunk = createAsyncThunk(
   async ({ newsId }, { rejectWithValue, dispatch }) => {
     try {
       const index = news.findIndex((item) => (item.newsId === newsId));
-      news[index].confirmed = true;
+      news[index] = { ...news[index], ...{ confirmed: true } };
 
-      dispatch(confirmNews(index));
+      dispatch(confirmNews(newsId));
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -99,7 +99,8 @@ export const newsSlice = createSlice({
       state.news.unshift(action.payload);
     },
     confirmNews: (state, action) => {
-      state.news[action.payload].confirmed = true;
+      const index = state.news.findIndex((item) => (item.newsId === action.payload));
+      state.news[index].confirmed = true;
     },
   },
   extraReducers: (builder) => {
